@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>qml/BrewPlot/BrewingControlChart.qml</file>
+        <file>qml/BrewPlot/ColorPicker.qml</file>
+        <file>qml/BrewPlot/main.qml</file>
+    </qresource>
+</RCC>
