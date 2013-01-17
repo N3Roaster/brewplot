@@ -243,23 +243,5 @@ Item {
         for(var i = 0.008; i < 0.0161; i += 0.0005) {
             yGridLines.append({"value": i, "pwidth": i.toFixed(4) == 0.0115 || i.toFixed(4) == 0.0135 ? 2 : 1});
         }
-		
-/*		yGridLines.append({"value": 0.008, "pwidth": 1})
-		yGridLines.append({"value": 0.0085, "pwidth": 1})
-		yGridLines.append({"value": 0.009, "pwidth": 1})
-		yGridLines.append({"value": 0.0095, "pwidth": 1})
-		yGridLines.append({"value": 0.01, "pwidth": 1})
-		yGridLines.append({"value": 0.0105, "pwidth": 1})
-		yGridLines.append({"value": 0.011, "pwidth": 1})
-		yGridLines.append({"value": 0.0115, "pwidth": 2})
-		yGridLines.append({"value": 0.012, "pwidth": 1})
-		yGridLines.append({"value": 0.0125, "pwidth": 1})
-		yGridLines.append({"value": 0.013, "pwidth": 1})
-		yGridLines.append({"value": 0.0135, "pwidth": 2})
-		yGridLines.append({"value": 0.014, "pwidth": 1})
-		yGridLines.append({"value": 0.0145, "pwidth": 1})
-		yGridLines.append({"value": 0.015, "pwidth": 1})
-		yGridLines.append({"value": 0.0155, "pwidth": 1})
-        yGridLines.append({"value": 0.016, "pwidth": 1})*/
 	}
 }
