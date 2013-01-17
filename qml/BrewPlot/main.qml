@@ -12,49 +12,22 @@ Rectangle {
 
     width: 720
     height: 680
-    Component.onCompleted: {
-        var quitItem = window.addMenuItem("File", "Quit");
-        quitItem.shortcut = "Ctrl+Q";
-        quitItem.triggered.connect(function() {
-                                       Qt.quit();
-                                   });
-        var clearItem = window.addMenuItem("Plotting", "Clear Data");
-        clearItem.triggered.connect(function() {
-                                        graph.clear();
-                                        dataViewModel.clear();
-                                        root.sumy = 0;
-                                        root.sumxsq = 0;
-                                        root.sumx = 0;
-                                        root.sumxy = 0;
-                                        root.n = 0;
-                                        graph.setFit(0, 0, 0, 0);
-                                    });
-        var showLeastSquares = window.addMenuItem("Plotting", "Least Squares Fit");
-        showLeastSquares.checkable = true;
-        showLeastSquares.triggered.connect(function() {
-                                               graph.setFitVisible(showLeastSquares.checked);
-                                               lsfrow.visible = showLeastSquares.checked;
-                                           });
-    }
+
     BrewingControlChart {
         id: graph
 
-        width: 450
-        height: 600
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-        anchors.top: parent.top
-        anchors.topMargin: 20
+        width: 450; height: 600
+        anchors {right: parent.right; rightMargin: 20; top: parent.top; topMargin: 20}
     }
     Item {
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors {left: parent.left; leftMargin: 10; top: parent.top; topMargin: 10}
+
         Column {
             spacing: 8
+
             Row {
                 spacing: 5
+
                 Text {
                     text: "Mass of ground coffee: "
                 }
@@ -69,10 +42,8 @@ Rectangle {
                     }
 
                     Line {
-                        x1: -3
-                        x2: 33
-                        y1: groundMass.height
-                        y2: y1
+                        x1: -3; y1: groundMass.height
+                        x2: 33; y2: y1
                         penWidth: 1
                         color: "black"
                     }
@@ -80,6 +51,7 @@ Rectangle {
             }
             Row {
                 spacing: 5
+
                 Text {
                     text: "Mass of brewed coffee:"
                 }
@@ -94,10 +66,8 @@ Rectangle {
                     }
 
                     Line {
-                        x1: -3
-                        x2: 33
-                        y1: brewedMass.height
-                        y2: y1
+                        x1: -3; y1: brewedMass.height
+                        x2: 33; y2: y1
                         penWidth: 1
                         color: "black"
                     }
@@ -105,11 +75,13 @@ Rectangle {
             }
             Row {
                 spacing: 56
+
                 Text {
                     text: "Percent TDS:"
                 }
                 TextInput {
                     id: ptds
+
                     width: 30
                     validator: DoubleValidator {
                         bottom: 0
@@ -117,11 +89,10 @@ Rectangle {
                         decimals: 2
                         notation: DoubleValidator.StandardNotation
                     }
+
                     Line {
-                        x1: -3
-                        x2: 33
-                        y1: ptds.height
-                        y2: y1
+                        x1: -3; y1: ptds.height
+                        x2: 33; y2: y1
                         penWidth: 1
                         color: "black"
                     }
@@ -129,29 +100,34 @@ Rectangle {
             }
             Row {
                 spacing: 87
+
                 Text {
                     id: colorlabel
+
                     text: "Color:"
                 }
                 ColorPicker {
                     id: colorpicker
-                    width: 37
-                    height: colorlabel.height
+
+                    width: 37; height: colorlabel.height
                 }
             }
             Row {
                 id: lsfrow
-                visible: false
 
+                visible: false
                 spacing: 1
+
                 Text {
                     id: fitcolorlabel
+
                     text: "Least Squares Fit Color:"
                 }
                 ColorPicker {
                     id: fitcolorpicker
-                    width: 37
-                    height: colorlabel.height
+
+                    width: 37; height: colorlabel.height
+
                     onColorChanged: {
                         graph.setFitColor(color)
                     }
@@ -160,19 +136,19 @@ Rectangle {
             Rectangle {
                 z: 0
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: buttonText.height + 20
-                width: buttonText.width + 40
+                height: buttonText.height + 20; width: buttonText.width + 40
                 border.color: "black"
                 radius: 10
+
                 Text {
                     id: buttonText
 
                     text: "Plot This Brew"
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors {horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter}
                 }
                 MouseArea {
                     anchors.fill: parent
+
                     onClicked: {
                         var extraction = (brewedMass.text * (ptds.text / 100)) / groundMass.text
                         graph.plotPoint(extraction, (ptds.text / 100), colorpicker.color)
@@ -218,9 +194,9 @@ Rectangle {
                 }
                 delegate: Row {
                     spacing: 3
+
                     Rectangle {
-                        width: 30
-                        height: 30
+                        width: 30; height: 30
                         color: dataViewModel.get(index).color
                     }
                     Column {
@@ -234,5 +210,29 @@ Rectangle {
                 }
             }
         }
+    }
+    Component.onCompleted: {
+        var quitItem = window.addMenuItem("File", "Quit");
+        quitItem.shortcut = "Ctrl+Q";
+        quitItem.triggered.connect(function() {
+            Qt.quit();
+        });
+        var clearItem = window.addMenuItem("Plotting", "Clear Data");
+        clearItem.triggered.connect(function() {
+            graph.clear();
+            dataViewModel.clear();
+            root.sumy = 0;
+            root.sumxsq = 0;
+            root.sumx = 0;
+            root.sumxy = 0;
+            root.n = 0;
+            graph.setFit(0, 0, 0, 0);
+        });
+        var showLeastSquares = window.addMenuItem("Plotting", "Least Squares Fit");
+        showLeastSquares.checkable = true;
+        showLeastSquares.triggered.connect(function() {
+            graph.setFitVisible(showLeastSquares.checked);
+            lsfrow.visible = showLeastSquares.checked;
+        });
     }
 }
