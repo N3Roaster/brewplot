@@ -237,21 +237,14 @@ Item {
         }
     }
 	Component.onCompleted: {
-		xGridLines.append({"value": 0.14, "pwidth": 1})
-		xGridLines.append({"value": 0.15, "pwidth": 1})
-		xGridLines.append({"value": 0.16, "pwidth": 1})
-		xGridLines.append({"value": 0.17, "pwidth": 1})
-		xGridLines.append({"value": 0.18, "pwidth": 2})
-		xGridLines.append({"value": 0.19, "pwidth": 1})
-		xGridLines.append({"value": 0.20, "pwidth": 1})
-		xGridLines.append({"value": 0.21, "pwidth": 1})
-		xGridLines.append({"value": 0.22, "pwidth": 2})
-		xGridLines.append({"value": 0.23, "pwidth": 1})
-		xGridLines.append({"value": 0.24, "pwidth": 1})
-		xGridLines.append({"value": 0.25, "pwidth": 1})
-		xGridLines.append({"value": 0.26, "pwidth": 1})
+        for(var i = 0.14; i < 0.261; i += 0.01) {
+            xGridLines.append({"value": i, "pwidth": i.toFixed(2) == 0.18 || i.toFixed(2) == 0.22 ? 2 : 1});
+        }
+        for(var i = 0.008; i < 0.0161; i += 0.0005) {
+            yGridLines.append({"value": i, "pwidth": i.toFixed(4) == 0.0115 || i.toFixed(4) == 0.0135 ? 2 : 1});
+        }
 		
-		yGridLines.append({"value": 0.008, "pwidth": 1})
+/*		yGridLines.append({"value": 0.008, "pwidth": 1})
 		yGridLines.append({"value": 0.0085, "pwidth": 1})
 		yGridLines.append({"value": 0.009, "pwidth": 1})
 		yGridLines.append({"value": 0.0095, "pwidth": 1})
@@ -267,6 +260,6 @@ Item {
 		yGridLines.append({"value": 0.0145, "pwidth": 1})
 		yGridLines.append({"value": 0.015, "pwidth": 1})
 		yGridLines.append({"value": 0.0155, "pwidth": 1})
-		yGridLines.append({"value": 0.016, "pwidth": 1})
+        yGridLines.append({"value": 0.016, "pwidth": 1})*/
 	}
 }
