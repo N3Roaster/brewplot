@@ -138,6 +138,8 @@ Rectangle {
                 }
             }
             Rectangle {
+                id: plotButton
+
                 z: 0
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: buttonText.height + 20; width: buttonText.width + 40
@@ -190,8 +192,12 @@ Rectangle {
                     }
                 }
             }
-            Repeater {
-                id: dataView
+            ListView {
+                spacing: 3
+                height: 400
+                width: 100
+                z: -1
+                contentHeight: dataViewModel.count * 35
 
                 model: ListModel {
                     id: dataViewModel
@@ -205,10 +211,10 @@ Rectangle {
                     }
                     Column {
                         Text {
-                            text: "Strength: "+dataViewModel.get(index).ptds+"% TDS"
+                            text: "Strength: " + dataViewModel.get(index).ptds + "% TDS"
                         }
                         Text {
-                            text: "Extraction: "+Number(dataViewModel.get(index).extraction*100).toFixed(2)+"%"
+                            text: "Extraction: " + Number(dataViewModel.get(index).extraction * 100).toFixed(2) + "%"
                         }
                     }
                 }
