@@ -40,6 +40,7 @@ Rectangle {
                         decimals: 2
                         notation: DoubleValidator.StandardNotation
                     }
+                    KeyNavigation.tab: brewedMass
 
                     Line {
                         x1: -3; y1: groundMass.height
@@ -64,6 +65,8 @@ Rectangle {
                         decimals: 2
                         notation: DoubleValidator.StandardNotation
                     }
+                    KeyNavigation.backtab: groundMass
+                    KeyNavigation.tab: ptds
 
                     Line {
                         x1: -3; y1: brewedMass.height
@@ -89,6 +92,7 @@ Rectangle {
                         decimals: 2
                         notation: DoubleValidator.StandardNotation
                     }
+                    KeyNavigation.backtab: brewedMass
 
                     Line {
                         x1: -3; y1: ptds.height
