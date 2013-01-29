@@ -23,14 +23,16 @@ symbian:TARGET.CAPABILITY += NetworkServices
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    qmllineitem.cpp
+    qmllineitem.cpp \
+    newpointcontrol.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    qmllineitem.h
+    qmllineitem.h \
+    newpointcontrol.h
 
 RESOURCES += \
     qmlfiles.qrc

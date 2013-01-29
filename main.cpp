@@ -2,6 +2,7 @@
 #include <QtDeclarative>
 #include "qmlapplicationviewer.h"
 #include "qmllineitem.h"
+#include "newpointcontrol.h"
 
 class QmlWindow : public QMainWindow
 {
@@ -9,13 +10,29 @@ class QmlWindow : public QMainWindow
 public:
     QmlWindow(QWidget *parent = NULL);
     Q_INVOKABLE QAction *addMenuItem(QString menu, QString item);
+signals:
+    void newPoint(QVariantMap pointDescription);
 private:
     QHash<QString,QMenu *> menus;
 };
 
 QmlWindow::QmlWindow(QWidget *parent) : QMainWindow(parent)
 {
-
+    QmlApplicationViewer *viewer = new QmlApplicationViewer;
+    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+    viewer->rootContext()->setContextProperty("window", this);
+    viewer->setSource(QUrl("qrc:/qml/qml/BrewPlot/main.qml"));
+    qApp->connect(viewer->engine(), SIGNAL(quit()), SLOT(quit()));
+    QWidget *central = new QWidget;
+    QHBoxLayout *layout = new QHBoxLayout;
+    NewPointControl *control = new NewPointControl;
+    layout->addWidget(control);
+    layout->addWidget(viewer);
+    central->setLayout(layout);
+    setCentralWidget(central);
+    viewer->setMinimumSize(viewer->sizeHint());
+    connect(control, SIGNAL(newPoint(QVariantMap)),
+            this, SIGNAL(newPoint(QVariantMap)));
 }
 
 QAction *QmlWindow::addMenuItem(QString menu, QString item)
@@ -44,13 +61,6 @@ int main(int argc, char *argv[])
 
     QmlWindow *window = new QmlWindow(NULL);
     window->setWindowTitle("BrewPlot");
-    QmlApplicationViewer *viewer = new QmlApplicationViewer;
-    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer->rootContext()->setContextProperty("window", window);
-    viewer->setSource(QUrl("qrc:/qml/qml/BrewPlot/main.qml"));
-    app.connect(viewer->engine(), SIGNAL(quit()), SLOT(quit()));
-    window->setCentralWidget(viewer);
-    viewer->setMinimumSize(viewer->sizeHint());
     window->show();
 
     return app.exec();
