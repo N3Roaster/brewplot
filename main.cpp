@@ -2,6 +2,7 @@
 #include <QtDeclarative>
 #include "qmlapplicationviewer.h"
 #include "qmllineitem.h"
+#include "newpointcontrol.h"
 
 class QmlWindow : public QMainWindow
 {
@@ -49,7 +50,13 @@ int main(int argc, char *argv[])
     viewer->rootContext()->setContextProperty("window", window);
     viewer->setSource(QUrl("qrc:/qml/qml/BrewPlot/main.qml"));
     app.connect(viewer->engine(), SIGNAL(quit()), SLOT(quit()));
-    window->setCentralWidget(viewer);
+    QWidget *central = new QWidget;
+    QHBoxLayout *layout = new QHBoxLayout;
+    NewPointControl *control = new NewPointControl;
+    layout->addWidget(control);
+    layout->addWidget(viewer);
+    central->setLayout(layout);
+    window->setCentralWidget(central);
     viewer->setMinimumSize(viewer->sizeHint());
     window->show();
 

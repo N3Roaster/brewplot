@@ -18,4 +18,6 @@ NewPointControl::NewPointControl(QWidget *parent) :
     flayout->addRow(tr("% total dissolved solids:"), tds);
     layout->addLayout(flayout);
     layout->addWidget(plot);
+    layout->addStretch();
+    setLayout(layout);
 }
