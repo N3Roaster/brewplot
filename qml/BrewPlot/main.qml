@@ -69,5 +69,11 @@ Rectangle {
             graph.setFitVisible(showLeastSquares.checked);
             lsfrow.visible = showLeastSquares.checked;
         });
+        window.newPoint.connect(function(pointDescription) {
+            graph.plotPoint(pointDescription.extraction,
+                            pointDescription.ptds / 100,
+                            pointDescription.color)
+            dataviewModel.append(pointDescription)
+        });
     }
 }
