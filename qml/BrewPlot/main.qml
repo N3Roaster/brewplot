@@ -10,8 +10,7 @@ Rectangle {
     property real sumxy : 0
     property int n : 0
 
-    width: 720
-    height: 680
+    width: 720; height: 680
 
     BrewingControlChart {
         id: graph
@@ -27,9 +26,7 @@ Rectangle {
 
             ListView {
                 spacing: 3
-                height: 400
-                width: 100
-                z: -1
+                height: 600; width: 100
                 contentHeight: dataViewModel.count * 35
 
                 model: ListModel {
@@ -55,7 +52,6 @@ Rectangle {
         }
     }
 
-
     Component.onCompleted: {
         var quitItem = window.addMenuItem("File", "Quit");
         quitItem.shortcut = "Ctrl+Q";
@@ -77,7 +73,6 @@ Rectangle {
         showLeastSquares.checkable = true;
         showLeastSquares.triggered.connect(function() {
             graph.setFitVisible(showLeastSquares.checked);
-            lsfrow.visible = showLeastSquares.checked;
         });
         window.newPoint.connect(function(pointDescription) {
             graph.plotPoint(pointDescription.extraction,
@@ -87,8 +82,8 @@ Rectangle {
             root.n += 1
             root.sumy += pointDescription.ptds / 100
             root.sumx += pointDescription.extraction
-            root.sumxy += ((pointDescription.ptds / 100) * extraction)
-            root.sumxsq += Math.pow(extraction, 2)
+            root.sumxy += ((pointDescription.ptds / 100) * pointDescription.extraction)
+            root.sumxsq += Math.pow(pointDescription.extraction, 2)
             if(root.n > 1) {
                 var a = ((root.sumy * root.sumxsq)-(root.sumx * root.sumxy))/((root.n * root.sumxsq)-Math.pow(root.sumx, 2))
                 var b = ((root.n * root.sumxy)-(root.sumx * root.sumy))/((root.n * root.sumxsq) - Math.pow(root.sumx, 2))
